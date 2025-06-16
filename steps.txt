@@ -1,0 +1,75 @@
+1- artisan commands: 
+        1- php artisan serve 
+        2- php artisan migrate 
+        3- php artisan make:controller UserController 
+        4- php artisan route:list
+
+2- 
+ Database : ORM --> Object Relational Mapper 
+
+
+ 1- table --> db  --> commands --> artisan 
+
+ make:migration            Create a new migration file
+
+ file --> create table --> 
+
+ php artisan make:migration create_TABLENAME_table --> create table
+ php artisan migrate --> apply tables into database 
+ php artisan migrate:rollback --> back to last batch 
+ php artisan migrate:refresh --> drop for all migrations files (down) and re migrate (up) 
+ php artisan migrate:status -->
+
+ php artisan make:migration create_teachers_table
+
+https://laravel.com/docs/12.x/migrations#available-column-types
+
+migration excute --> database --> php artisan migrate
+
+// to add new column to exist table : 
+        php artisan make:migration add_age_column_to_teachers_table
+                $table->integer('age')->nullable();
+// to drop table : 
+        php artisan make:migration drop_courses_table 
+
+// DB Structre --> DONE --> migrations
+
+// DB Data --> MODEL --> make:model         Create a new Eloquent model class
+
+
+table --> teachers --> plural 
+model --> represent -->one row --> Teacher 
+
+php artisan make:model Teacher 
+
+
+module --> Teacher : 
+        1- create table teachers 
+        2- create model Teacher
+        3- create controller TeacherController
+        4- create route for Teacher
+        5- create view for Teacher
+
+module --> posts : 
+            1- create table posts --> migration --> php artisan make:migration create_posts_table
+            2- run migration --> php artisan migrate  
+            3- create model --> php artisan make:model Post 
+
+            4- controller 
+            5- route
+            6- view
+
+
+
+
+User  --> users 
+Teacher --> my_teachers
+
+
+
+
+
+
+
+
+drop table courses --> 

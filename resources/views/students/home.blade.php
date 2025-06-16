@@ -18,7 +18,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/students">Students</a>
+                    <a class="nav-link active" aria-current="page" 
+                    href="{{route('list')}}">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" 
+                    href="{{route('teachers.index')}}">Teachers</a>
                 </li>
                 
             </div>
