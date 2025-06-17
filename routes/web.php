@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
-
+use App\Http\Controllers\DepartmentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,8 +29,24 @@ Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teach
 
 Route::post('/teachers', [TeacherController::class, 'store'])->name('teachers.store');
 
-
 Route::get('/teacher/delete/{id}', [TeacherController::class, 'delete'])->name('teachers.delete');
 
 // /teachers/333   fvjbfhv   4574567 
+
+Route::get('/teacher/edit/{id}', [TeacherController::class, 'edit'])->name('teachers.edit');
 // 
+
+Route::put('/teachers/{id}', [TeacherController::class, 'update'])->name('teachers.update');
+
+
+// controller resource--> index, show, create, store, edit, update, destroy
+Route::resource('/departments', DepartmentController::class);
+// Route::get('/departments/delete/{id}', [DepartmentController::class, 'destory'])->name('teachers.delete');
+
+// Route::resource('anyaothername', DepartmentController::class)->name('index', 'departments.index')
+//     ->name('create', 'departments.create')
+//     ->name('store', 'departments.store')
+//     ->name('show', 'departments.show')
+//     ->name('edit', 'departments.edit')
+//     ->name('update', 'departments.update')
+//     ->name('destroy', 'departments.destroy');

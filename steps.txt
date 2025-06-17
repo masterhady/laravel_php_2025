@@ -65,11 +65,71 @@ module --> posts :
 User  --> users 
 Teacher --> my_teachers
 
+_________________________________________________________________________
+Day 3: 
+function --> form 
+submit --> function 
+
+## Validation: 
+        https://laravel.com/docs/12.x/validation#available-validation-rules
 
 
 
+1- add validation rules  
+                controller: 
+                        request()=>validate([
+                                validation rules 
+                        ])
+2- edit validation messages: 
+        controller: 
+         request()=>validate([
+                                validation rules 
+                        ],[
+                                validation messages
+                        ])
+3- show erorrs messages for user: 
+create.blade.php
+                1- @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
+        2- after each input: 
+           @error('name')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
 
+4- if there is any erorr it deletes all input data to solve this: 
+                <input value={{old("name")}}
 
+_________________________________________________________________________
+controller : 
+                index, show, create, store, edit, update, delete 
+CRUD index, show, create, store, edit, update, delete, 
 
-drop table courses --> 
+create module: 
+                1- create table:        
+                        php artisan make:migration create_departments_table
+                2- create model: 
+                        php artisan make:model Department 
+                3- create controller: 
+                        php artisan make:controller DepartmentController --resource
+                4- add routes: 
+                        web.php 
+                5- add views: 
+                        create Views
+                
+Lab 3: 
+        1- make sure the full crud of posts 
+        2- create category --> resource controller 
+        3- add validation 1-create  2-edit 
+
+Bonus: 
+        1- seeding - factory 
+        2- pagination
+_______________________________________________________

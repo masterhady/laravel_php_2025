@@ -25,7 +25,10 @@
                     <a class="nav-link active" aria-current="page" 
                     href="{{route('teachers.index')}}">Teachers</a>
                 </li>
-                
+                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" 
+                    href="{{route('departments.index')}}">Departments</a>
+                </li>
             </div>
         </div>
         </nav>
