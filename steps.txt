@@ -133,3 +133,152 @@ Bonus:
         1- seeding - factory 
         2- pagination
 _______________________________________________________
+
+Day 4: 
+        1- Relation 
+        2- auth 
+        3- middleware
+
+1- Relation: 
+                1- Teachers and Department 
+
+        
+1- one to many : 
+        teacher belongs to department 
+        department has many teachers
+
+2- add department_id to teachers table 
+
+4- create migration file: 
+        php artisan make:migration add_department_id_to_teachers_table
+
+5- define ralation between department and teacher: --> model  --> relations 
+
+
+_____________________________________________________________________________--
+
+1- Relation department and teachers --> one to many 
+
+2- add department_id into teachers table : 
+        php artisan make:migrgation add_department_id_to_teachers_table
+                code: 
+$table->foreignId('department_id')->constrained('departments')->onDelete('cascade')->onUpdate('cascade')->nullable();
+
+3- php artisan migrate 
+
+4- create teacher --> select departmnet 
+                <select> 
+                        get alllll departments --> teacher controller --> Department::all();
+                </select>
+
+5- view teacher with his department --> show the department into show of teacher  -> department_id 
+i nned to shw the NAME of department 
+
+6- so we need to define the relation:
+in teacher model:
+        function department(){
+                return $this->belongsTo(Department::class);
+        }
+in department model: 
+        function teachers(){
+                return $this->hasMany(Teachers::class);
+        }
+
+
+7- in show of teacher: 
+        $teacher->department->name
+
+
+_______________________________________________________________
+
+
+Auth system : 
+                login registration logout 
+
+
+https://github.com/laravel/ui 
+
+1- composer require laravel/ui
+
+2- php artisan ui bootstrap --auth   // controller.php home.blade.php 
+
+3- npm install && npm run dev     (and the server of laravel is already)
+
+
+1- to run your project: 
+                php artisan serve 
+                npm run dev
+_____________________________________________________________________
+middleware --> auth:
+ 
+ 1- Routes  -> middleware("auth")
+
+ 2- Controller  --> function __construct(){
+
+ }
+_______________________________________________________
+
+Who is the create the department: 
+
+        1- Relation between users and department: 
+                user can create mnay of departments
+
+                department belongsTo user 
+
+        2- add user_id into departments
+
+
+        3- create department --> user_id --> id logged in
+
+        4- create department save the loggedIn user
+
+
+______________________________________________________________
+
+
+
+1- Relation --> models 
+
+2- Auth --> commands
+
+3- middleware("auth")
+
+4- Gate 
+
+
+Authentication --> who are you ? 
+
+Authorization --> what can you do ? 
+
+
+1- Authorization: 
+                Gate  --> who the create the department he can edit/delete 
+                        department -> user_id === loggedIn user_id 
+
+to define your Gate: 
+                app/providers/AppServiceProvider.php
+                
+
+Lab day4: 
+                1- add new column to the users table --> image of user 
+
+                1- relation between posts and comments 
+
+                2- relation between posts and category 
+
+                3-  you need to login to create/delete/edit post
+
+                4- need to show who the creator of the post (relation posts + user)
+
+                5- only the creator of the post who can edit/delete 
+
+                6-  you need to login to create/delete/edit comment
+
+                7- need to show who the creator of the comment (relation comment + user)
+
+                8- only the creator of the comment who can edit/delete 
+
+                Bonus: 
+                        1- slug 
+                        2- upload image  
+________________________________________________________________________________

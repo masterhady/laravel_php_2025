@@ -15,15 +15,16 @@ Route::get('/iti', function(){
 });
 
 // Route --> call controller 
-Route::get('/students', [StudentController::class, 'listStudents'])->name("list");
+// Route::get('/students', [StudentController::class, 'listStudents'])->name("list");
 
 
 Route::get('/students/{id}',[StudentController::class, 'getStudent'] )->name("show");
 
 
-Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
+Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index')->middleware('auth');
 
-Route::get('/teachers/{id}', [TeacherController::class, 'show'])->name('teachers.show');
+Route::get('/teachers/{id}', [TeacherController::class, 'show'])->name('teachers.show')->middleware('auth');
+
 
 Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teachers.create');
 
@@ -50,3 +51,12 @@ Route::resource('/departments', DepartmentController::class);
 //     ->name('edit', 'departments.edit')
 //     ->name('update', 'departments.update')
 //     ->name('destroy', 'departments.destroy');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::middleware(['auth'])->group(function(){
+    // Route::resource('/departments', DepartmentController::class);
+    Route::get('/students', [StudentController::class, 'listStudents'])->name("list");
+});

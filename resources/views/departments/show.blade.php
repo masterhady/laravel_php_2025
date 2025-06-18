@@ -13,6 +13,23 @@ Department Details
         <div class="card-body">
             <h5 class="card-title">{{ $department->name }}</h5>
             <p>Info: {{ $department->description }}</p>
+            <p> Head of Department: {{$department->user->name}}</p>
+            <div> 
+                <p>Teachers:</p>
+                {{-- list all teachers that belongs to this department  --}}
+                <ul>
+                    @forelse ($department->teachers as $teacher)
+                         <li> {{$teacher->name}}</li>
+                    @empty
+                        <li class="text-danger">No teachers found in this department.</li>
+                    @endforelse
+
+                    {{-- @foreach($department->teachers as $teacher)
+                        <li> {{$teacher->name}}</li>
+                    @endforeach --}}
+                </ul>
+            </div>
+               
         </div>
     </div>
 

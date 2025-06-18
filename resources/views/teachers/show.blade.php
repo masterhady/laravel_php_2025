@@ -8,6 +8,8 @@ Teacher Details
 Teacher Details
 @endsection
 
+{{-- @dd($my_teacher); --}}
+
 @section('content')
     <div class="card mb-3" style="max-width: 240px;">
         <div class="card-body">
@@ -16,6 +18,9 @@ Teacher Details
             <p>Age: {{ $my_teacher->age }}</p>
             <p>Info: {{ $my_teacher->info }}</p>
             <p>Courses: {{ $my_teacher->courses }}</p>
+            {{-- <p>Department: {{ $my_teacher->department_id }}</p> --}}
+            <p>Department: {{ $my_teacher->department->name }}</p>
+
             <img src="{{ asset('images/'.$my_teacher->photo) }}" width='100px' alt="">
         </div>
     </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Teacher; // Import the Teacher model
+use App\Models\Department; // Import the Teacher model
+
 
 class TeacherController extends Controller
 {
@@ -25,7 +27,9 @@ class TeacherController extends Controller
     function create(){
         // return form to create teacher
         // dd("create teacher form");
-        return view('teachers.create'); // form
+        // all departments
+        $departments = Department::all(); // get all departments
+        return view('teachers.create', compact('departments')); // form
     }
 
     function store(){
@@ -51,6 +55,7 @@ class TeacherController extends Controller
         $teacher->photo= request()->image; // get name from request
         $teacher->info= request()->info; // get name from request
         $teacher->courses= request()->courses; // get name from request
+        $teacher->department_id = request()->department_id; // get department id from request
         $teacher->save(); // save to database
         // redirect to index page // view index // route index 
         // // return view('teachers.index');
@@ -60,8 +65,9 @@ class TeacherController extends Controller
     function edit($id){
         // find teacher by id
         $teacher  = Teacher::findorfail($id); // find teacher by id
+         $departments = Department::all(); 
         // dd($teacher);
-        return view('teachers.edit', ['myteacher' => $teacher]); // return view with teacher data
+        return view('teachers.edit', ['myteacher' => $teacher, 'departments'=>$departments ]); // return view with teacher data
     }
 
     function update($id){
@@ -82,7 +88,7 @@ class TeacherController extends Controller
         $teacher ->photo = $image; // update name
         $teacher ->courses = $courses; // update name
         $teacher ->info = $info; // update name
-
+        $teacher->department_id = request()->department_id; 
         $teacher->save(); // save to database
         // alert updated successfully
         return to_route('teachers.index');

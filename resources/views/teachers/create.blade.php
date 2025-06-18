@@ -8,6 +8,7 @@ Create Teacher
 Create Teacher
 @endsection
 
+  {{-- @dd($departments); --}}
 @section('content')
         {{-- @dd(error()); --}}
         {{-- // if errors --}}
@@ -65,6 +66,18 @@ Create Teacher
             <label class="form-label">Courses</label>
             <input type="text" class="form-control" name="courses"
              value="{{ old('courses') }}">
+        </div>
+
+        <div>
+            <label class="form-label"> Department </label>
+            <select class="form-select" name="department_id">
+                {{-- // department list --}}
+                @foreach ($departments as $department)
+                    <option value="{{$department->id}}"> {{$department->name}} </option>
+                @endforeach
+
+            </select>
+                
         </div>
        
         <button type="submit" class="btn btn-primary">Submit</button>

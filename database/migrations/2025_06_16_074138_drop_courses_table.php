@@ -19,6 +19,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        //create the courses table again
     }
 };
+
+
+// refresh --> 1- down function run + up function run
