@@ -282,3 +282,61 @@ Lab day4:
                         1- slug 
                         2- upload image  
 ________________________________________________________________________________
+
+1- roles  -->  admin, manager 
+
+php artisan make:migration add_role_to_users_table --> gates 
+
+
+2- Request: --> validation rules + messages 
+        php artisan make:request StoreDepartmentRequest 
+
+3- API: 
+        models + controller + Routes  
+
+        laravel 12:     
+
+        --> api.php --> routes --> /api/
+
+
+        php artisan  install:api   
+4- resource -->the returned data  
+
+
+_______________________________________________________
+ module courses: 
+        1- create table
+                php artisan make:migration create_courses_table 
+        2- create model 
+                php artisan make:model Course 
+        3- create resource controller:  index  edit update create store detroy 
+
+                                                edit / create -->  forms 
+        4- create controller: 
+                php artisan make:controller /API/CourseController --api 
+
+                                index update store destroy show
+_______________________________________________________
+php artisan make:resource --> change the returned data  
+
+
+// controller + api.php (routes)
+
+        Lab 5: 
+                1- use views: add role admin,user 
+                                1- can edit or delete any post 
+
+                1- posts use API 
+
+                2- comments use API 
+
+                3- return the posts with all comments  using API + Reource 
+
+                4- add validation in Request for 
+                                1- comment store and post store 
+                                2- comment update and post update 
+                
+
+_______________________________________________________________________________
+
+

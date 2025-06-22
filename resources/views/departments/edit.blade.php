@@ -18,11 +18,17 @@ Edit Department
             <input type="text" class="form-control" name="name"
              value={{$department->name}}>
         </div>
+        @error('name')
+                <div class="text-danger">{{ $message }}</div>
+        @enderror
         <div class="mb-3">
             <label class="form-label">Description</label>
             <input type="text" class="form-control" name="description" 
             value={{$department->description}}>
         </div>
+        @error('description')
+                <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Department;
 use Illuminate\Support\Facades\Gate; // Import the Gate facade
+use App\Http\Requests\StoreDepartmentRequest; // Import the StoreDepartmentRequest
 class DepartmentController extends Controller
 {
     /**
@@ -38,22 +39,16 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDepartmentRequest $request)
     {   
 
         $department = new Department();
+        
         $department->name = $request->name;
         $department->description = $request->description;
         $department->user_id = auth()->user()->id; // catch all data of the logged in user 
         $department->save();
-
-        // dd(auth()->user()->id);
-        // $department = Department::create($request->all()); // don't forget to add the fillable attributes in the model 
-            // $department->user_id = auth()->user()->id; // set the user_id to the authenticated user id
-        
-        // rfedirect to index page
         return to_route('departments.index');
-        // ->with('success', 'Department created successfully');
 
     }
 
@@ -79,7 +74,7 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreDepartmentRequest $request, string $id)
     {
         $department = Department::findorfail($id);
         $department->update($request->all());
@@ -96,8 +91,12 @@ class DepartmentController extends Controller
         $department = Department::findorfail($id); // id
          // get the authenticated user
 
-        if(Gate::allows("manage-department", $department) === false){
-            // if the user is not allowed to delete the department, redirect to index page with error message
+        // if(Gate::allows("manage-department", $department) === false){
+        //     // if the user is not allowed to delete the department, redirect to index page with error message
+        //     return to_route('departments.index');
+        // }
+
+        if(Gate::allows('delete-department', $department) === false){
             return to_route('departments.index');
         }
 

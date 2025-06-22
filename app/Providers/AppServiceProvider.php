@@ -27,5 +27,19 @@ class AppServiceProvider extends ServiceProvider
             $user = auth()->user()->id; // defualt user id
             return $user === $department->user_id;
         });
+
+
+        Gate::define('delete-department', function(User $user, Department $department) {
+        
+            return $user->role == "admin"  || auth()->user()->id === $department->user_id;
+        });
     }
 }
+
+
+
+// function test($x = 1){
+//     return $x +1;
+// }
+
+// test()

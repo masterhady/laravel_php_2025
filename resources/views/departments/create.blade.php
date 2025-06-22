@@ -18,15 +18,18 @@ Create Department
             <input type="text" class="form-control" 
             value="{{ old('name') }}"
             name="name" >
-            {{-- @error('name')
+            @error('name')
                 <div class="text-danger">{{ $message }}</div>
-            @enderror --}}
+            @enderror
         </div>
         <div class="mb-3">
             <label class="form-label">Description</label>
             <input type="text" class="form-control" name="description"  
             value="{{ old('description') }}">
         </div>
+        @error('description')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
        
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>

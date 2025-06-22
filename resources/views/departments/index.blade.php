@@ -25,7 +25,7 @@ Departments List
                     <tr>
                         <th scope="col" class="fw-bold">Name</th>
                         <th scope="col" class="fw-bold">Description</th>
-                        <th scope="col" class="fw-bold">Department</th>
+                        <th scope="col" class="fw-bold">Department Creator</th>
 
                         <th scope="col" class="fw-bold text-center">Actions</th>
                     </tr>
@@ -47,13 +47,14 @@ Departments List
                                         <a class="btn btn-outline-warning btn-sm mx-1" href="{{ route('departments.edit', $department->id) }}">Edit
                                         </a>
                                     @else
-                                        <a class="btn btn-outline-warning btn-sm mx-1 disabled" href="#">Edit
+                                        <a class="btn btn-warning btn-sm mx-1 disabled" href="#">
+                                             Edit
                                         </a>
                                    
                                     @endcan 
                                         
                                     {{-- // to use gate in views can --}}
-                                    @can('manage-department',$department)
+                                    @can('delete-department',$department)
                                         <form class="d-inline mx-1" method="post" action="{{ route('departments.destroy', $department->id) }}">
                                             @method('DELETE')
                                             @csrf
