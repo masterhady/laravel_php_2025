@@ -60,3 +60,10 @@ Route::middleware(['auth'])->group(function(){
     // Route::resource('/departments', DepartmentController::class);
     Route::get('/students', [StudentController::class, 'listStudents'])->name("list");
 });
+
+
+use App\Http\Controllers\Auth\GithubController;
+
+Route::get('/auth/github', [GithubController::class, 'redirectToGithub']);
+Route::get('/auth/github/callback', [GithubController::class, 'handleGithubCallback']); // url --> github
+

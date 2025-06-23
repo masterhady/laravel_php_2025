@@ -12,6 +12,11 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct(){
+        $this->middleware('auth:sanctum');
+    }
+
     public function index()
     {
         // return Course::all();
@@ -24,7 +29,12 @@ class CourseController extends Controller
     public function store(StoreCourseRequest $request)
     {
     
-        $course = Course::create($request->validated());
+        // $course = Course::create($request->validated());
+        $data = $request->validated();
+        // $data["user_id"] = $request->user()->id;
+        $data["user_id"] = auth()->id();
+
+        $course = Course::create($data);
         // return response()->json($course, 201);
         return new CourseResource($course);
 

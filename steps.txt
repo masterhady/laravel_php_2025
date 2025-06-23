@@ -298,7 +298,6 @@ php artisan make:migration add_role_to_users_table --> gates
 
         --> api.php --> routes --> /api/
 
-
         php artisan  install:api   
 4- resource -->the returned data  
 
@@ -340,3 +339,92 @@ php artisan make:resource --> change the returned data
 _______________________________________________________________________________
 
 
+1- API : 
+         1- Auth registration,login, logout (middleware)
+
+
+                1- users table + user model  
+                2- controller --> php artisan make:controller API/AuthController 
+
+                3- add routes --> api.php : 
+                        Route::post('/register', [AuthController::class, "register"]);
+
+                4- add function register --> controller : 
+                        to use createToken 
+                5- in model: 
+                        hasApiTokens 
+
+
+        token types: 
+                jwt --> nodejs  
+                sanctum --> laravel 
+
+
+
+
+1- user model --> by default 
+2- users table --> by default 
+
+3- controller: need to create: 
+                php artisan make:controllre API/AuthController 
+
+4- add register: 
+        1- create user 
+        2- hash password --> bcrypt(password)
+        3- create token --> snactum --> model --> snactum  --> in User model --> HasApiTokens 
+
+5- add login function: 
+        1- check email --> where 
+        2- check password --> Hash::check 
+        3- create token --> 
+
+6- logout --> the user must be login to make logout --> middleware 
+        delete current token --> add middleware (auth:sanctum)
+_________________________________________________________________________________
+
+2- Auth: login using github: 
+
+                1-         composer require laravel/socialite     
+
+                2- edit the .env:  https://github.com/settings/developers
+                     
+                     
+                3- in config/service.php 
+                        add github section : 
+                        'github'=> [
+                                'client_id' => env('GITHUB_CLIENT_ID'),
+                                'client_secret' => env('GITHUB_CLIENT_SECRET'),
+                                'redirect' => env('GITHUB_REDIRECT_URI')
+                        ]
+
+                4- php make:controlloer Auth/GithubController 
+
+
+                        add : 
+                                use Laravel\Socialite\Facades\Socialite;
+                                use Illuminate\Support\Facades\Auth;
+                                use Illuminate\Support\Str;
+
+                5- ADD IN ROUTES : 
+                        use App\Http\Controllers\Auth\GithubController;
+
+                        Route::get('/auth/github', [GithubController::class, 'redirectToGithub']);
+                        Route::get('/auth/github/callback', [GithubController::class, 'handleGithubCallback']);
+
+                6- in views: 
+                        <a href="{{url('/auth/github')}}" class="btn btn-dark" > 
+                                Login using Github
+                        </a>
+___________________________________________________________________________________________
+
+
+lab 6: 
+                1- add login using github 
+
+                2- add api for login, register and logout
+
+                3- add middleware for post/comments api 
+
+                Bonus: 
+                        1- policy 
+                        2- custome middleware

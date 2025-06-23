@@ -27,7 +27,7 @@ class StoreCourseRequest extends FormRequest
             'description' => 'required|min:10',
             'price' => "required",
             'duration' => "required",
-            'user_id' => "required"
+            // 'user_id' => "required"
         ];
     }
 
